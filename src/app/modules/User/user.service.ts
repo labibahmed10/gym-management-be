@@ -21,7 +21,7 @@ const loginUserIntoDB = async (userData: IUser) => {
   }
 
   const payload = {
-    id: user._id,
+    userId: user._id,
     role: user.role,
     email: user.email,
   };

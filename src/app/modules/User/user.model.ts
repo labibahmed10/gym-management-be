@@ -6,10 +6,6 @@ import config from "../../config/config";
 
 const userSchema = new Schema<IUser, IUserModel>(
   {
-    name: {
-      type: String,
-      required: [true, "Name is required"],
-    },
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -59,6 +55,11 @@ userSchema.set("toJSON", {
 
 userSchema.statics.isPasswordMatched = async function (candidatePassword: string, hashedPassword: string): Promise<boolean> {
   return await bcrypt.compare(candidatePassword, hashedPassword);
+};
+
+userSchema.statics.isUserExistById = async function (id: string): Promise<IUser | null> {
+  console.log(id);
+  return await this.findById(id);
 };
 
 userSchema.statics.isUserExistByEmail = async function (email: string): Promise<IUser | null> {
