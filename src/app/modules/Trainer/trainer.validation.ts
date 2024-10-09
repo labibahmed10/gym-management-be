@@ -3,7 +3,6 @@ import { z } from "zod";
 const TrainerCreateValidation = z.object({
   body: z.object({
     userId: z.string(),
-
     specialization: z.string({
       required_error: "Specialization is required",
     }),

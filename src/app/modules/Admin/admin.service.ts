@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 import { userRole } from "../User/user.constant";
 
 const getAllTrainersFromDB = async () => {
-  const trainers = await TrainerModel.find({});
+  const trainers = await TrainerModel.find({}).populate("userId");
   return trainers;
 };
 

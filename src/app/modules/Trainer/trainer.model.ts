@@ -28,9 +28,6 @@ const trainerSchema = new Schema<ITrainer>(
   }
 );
 
-
-
-
 const TrainerModel = model<ITrainer>("Trainer", trainerSchema);
 
 export default TrainerModel;
