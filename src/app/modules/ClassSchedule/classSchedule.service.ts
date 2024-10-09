@@ -35,11 +35,12 @@ const updateScheduleByIdFromDB = async (id: string, payload: Partial<ISchedule>)
 
   if (payload.startTime || payload.endTime) {
     const startDateTime = parseISO(`${payload.date || scheduleClass.date}T${payload.startTime || scheduleClass.startTime}`);
-    const endDateTime = parseISO(`${payload.date || scheduleClass.date}T${scheduleClass.endTime}`);
+    const endDateTime = parseISO(`${payload.date || scheduleClass.date}T${payload.endTime || scheduleClass.endTime}`);
+
     const durationInHours = (endDateTime.getTime() - startDateTime.getTime()) / (1000 * 60 * 60);
 
     if (durationInHours !== 2) {
-      throw new Error("Schedule duration must be exactly 2 hours");
+      throw new AppError(httpStatus.BAD_REQUEST, "Schedule duration must be exactly 2 hours");
     }
   }
 

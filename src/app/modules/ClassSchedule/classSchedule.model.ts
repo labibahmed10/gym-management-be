@@ -63,7 +63,6 @@ scheduleSchema.pre("save", async function (next) {
   const scheduleCountADay = await ScheduleModel.countDocuments({
     date: this.date,
   });
-  console.log(scheduleCountADay);
   if (scheduleCountADay >= 5) {
     throw new AppError(httpStatus.BAD_REQUEST, "Class Schedule is full for today");
   }
