@@ -19,4 +19,6 @@ ScheduleRoute.put("/schedule/:id", isAdmin,
     ClassScheduleController.updateScheduleById
 );
 
+ScheduleRoute.delete("/schedule/:id", isAdmin, ClassScheduleController.deleteScheduleById);
+
 export default ScheduleRoute;

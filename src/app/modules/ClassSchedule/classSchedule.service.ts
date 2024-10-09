@@ -48,9 +48,15 @@ const updateScheduleByIdFromDB = async (id: string, payload: Partial<ISchedule>)
   return schedule;
 };
 
+const deleteScheduleByIdFromDB = async (id: string) => {
+  const schedule = await ScheduleModel.findByIdAndDelete(id);
+  return schedule;
+};
+
 export const ClassScheduleService = {
   createScheduleIntoDB,
   getAllSchedulesFromDB,
   getScheduleByIdFromDB,
   updateScheduleByIdFromDB,
+  deleteScheduleByIdFromDB,
 };
