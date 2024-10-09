@@ -63,6 +63,7 @@ scheduleSchema.pre("save", async function (next) {
   const scheduleCountADay = await ScheduleModel.countDocuments({
     date: this.date,
   });
+
   if (scheduleCountADay >= 5) {
     throw new AppError(httpStatus.BAD_REQUEST, "Class Schedule is full for today");
   }
@@ -84,10 +85,13 @@ scheduleSchema.pre("save", async function (next) {
     ],
   });
 
-  console.log(overlappingSchedule);
-
   if (overlappingSchedule) {
     throw new AppError(httpStatus.BAD_REQUEST, "Class schedule overlaps with existing schedule");
+  }
+
+  // Ensure booked trainees do not exceed maxTrainees
+  if (this.bookedTrainees.length > this.maxTrainees) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Class is already fully booked. Max 10 trainees.");
   }
 
   next();
