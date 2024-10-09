@@ -5,6 +5,7 @@ export type TUserStatus = "active" | "blocked";
 
 export interface IUser {
   _id?: string;
+  name: string;
   email: string;
   role: TUserRole;
   password: string;

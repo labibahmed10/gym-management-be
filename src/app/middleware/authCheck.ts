@@ -10,6 +10,7 @@ import UserModel from "../modules/User/user.model";
 const authCheck = (...requiredRoles: TUserRole[]) => {
   return catchAsyncFunc(async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     const token = req.headers.authorization?.replace("Bearer ", "");
+    console.log(token);
     if (!token) {
       return next(new AppError(httpStatus.UNAUTHORIZED, "Token not found"));
     }
@@ -21,7 +22,6 @@ const authCheck = (...requiredRoles: TUserRole[]) => {
       return next(new AppError(httpStatus.UNAUTHORIZED, "Invalid token"));
     }
 
-    console.log(decoded);
     const user = await UserModel.isUserExistById(decoded.userId);
     if (!user) {
       return next(new AppError(httpStatus.NOT_FOUND, "User not found"));

@@ -6,6 +6,10 @@ import config from "../../config/config";
 
 const userSchema = new Schema<IUser, IUserModel>(
   {
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+    },
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -58,7 +62,6 @@ userSchema.statics.isPasswordMatched = async function (candidatePassword: string
 };
 
 userSchema.statics.isUserExistById = async function (id: string): Promise<IUser | null> {
-  console.log(id);
   return await this.findById(id);
 };
 

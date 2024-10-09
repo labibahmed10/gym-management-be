@@ -9,10 +9,6 @@ const trainerSchema = new Schema<ITrainer>(
       required: [true, "User is required"],
       unique: true,
     },
-    name: {
-      type: String,
-      required: [true, "Name is required"],
-    },
     specialization: {
       type: String,
       required: [true, "Specialization is required"],
@@ -31,6 +27,9 @@ const trainerSchema = new Schema<ITrainer>(
     versionKey: false,
   }
 );
+
+
+
 
 const TrainerModel = model<ITrainer>("Trainer", trainerSchema);
 
