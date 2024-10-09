@@ -4,5 +4,9 @@
   "editor.defaultFormatter.options": {
     "tabWidth": 2,
     "useEditorConfig": true
-  }
+  },
+  "workbench.editor.tabSizingFixedMaxWidth": 200,
+  "workbench.editor.tabSizingFixedMinWidth": 150,
+  "terminal.integrated.tabStopWidth": 8,
+  "prettier.printWidth": 150
 }

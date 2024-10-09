@@ -5,7 +5,7 @@ import config from "./app/config/config";
 
 let server: Server;
 
-async function main() {
+async function connectDB() {
   try {
     await mongoose.connect(config.database_url as string);
     server = app.listen(config.port, () => {
@@ -16,7 +16,7 @@ async function main() {
   }
 }
 
-main();
+connectDB();
 
 process.on("unhandledRejection", () => {
   console.log(`😈 unhandledRejection is detected , shutting down ...`);
