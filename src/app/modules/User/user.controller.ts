@@ -10,6 +10,14 @@ const registerUser = catchAsyncFunc(async (req, res) => {
   sendResponse(res, httpStatus.CREATED, "User registered successfully", result);
 });
 
+const loginUser = catchAsyncFunc(async (req, res) => {
+  const { ...userData } = req.body;
+  const result = await UserServices.loginUserIntoDB(userData);
+
+  sendResponse(res, httpStatus.CREATED, "User registered successfully", result);
+});
+
 export const UserController = {
   registerUser,
+  loginUser,
 };

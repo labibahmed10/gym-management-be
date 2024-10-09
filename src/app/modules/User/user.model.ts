@@ -30,7 +30,6 @@ const userSchema = new Schema<IUser, IUserModel>(
       type: String,
       enum: UserStatus,
       default: "active",
-      required: [true, "Status is required"],
     },
   },
   {
@@ -58,10 +57,14 @@ userSchema.set("toJSON", {
   },
 });
 
-userSchema.methods.isPasswordMatched = async function (candidatePassword: string): Promise<boolean> {
-  return await bcrypt.compare(candidatePassword, this.password);
+userSchema.statics.isPasswordMatched = async function (candidatePassword: string, hashedPassword: string): Promise<boolean> {
+  return await bcrypt.compare(candidatePassword, hashedPassword);
 };
 
-const UserModel: Model<IUser> = model<IUser, IUserModel>("User", userSchema);
+userSchema.statics.isUserExistByEmail = async function (email: string): Promise<IUser | null> {
+  return await this.findOne({ email }).select("+password");
+};
+
+const UserModel = model<IUser, IUserModel>("User", userSchema);
 
 export default UserModel;

@@ -12,6 +12,11 @@ export interface IUser {
   status: TUserStatus;
 }
 
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
 // user static model interface
 export interface IUserModel extends Model<IUser> {
   isUserExistById(id: string): Promise<IUser | null>;
