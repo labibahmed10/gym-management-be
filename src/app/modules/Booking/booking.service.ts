@@ -31,6 +31,31 @@ const createBookingIntoDB = async (payload: IBooking) => {
   return newBooking;
 };
 
+const getBookingsByTrainee = async (traineeId: string) => {
+  const bookings = await BookingModel.find({ traineeId });
+  return bookings;
+};
+
+const cancelBookingByTrainee = async (bookingId: string) => {
+  const booking = await BookingModel.findOneAndDelete({ _id: bookingId });
+  if (booking) {
+    await ClassScheduleModel.findByIdAndUpdate(
+      booking.scheduleId,
+      {
+        $pull: { bookedTrainees: booking?.traineeId },
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+  }
+
+  return booking;
+};
+
 export const BookingService = {
   createBookingIntoDB,
+  getBookingsByTrainee,
+  cancelBookingByTrainee,
 };

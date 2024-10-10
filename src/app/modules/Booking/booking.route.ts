@@ -8,4 +8,8 @@ const BookingRoute = Router();
 
 BookingRoute.post("/", isTrainee, validateRequest(BookingValidation.bookingCreateSchema), BookingController.createBooking);
 
+BookingRoute.get("/trainee", isTrainee, BookingController.getBookingsByTrainee);
+
+BookingRoute.delete("/cancel/:id", isTrainee, BookingController.cancelBookingByTrainee);
+
 export default BookingRoute;
