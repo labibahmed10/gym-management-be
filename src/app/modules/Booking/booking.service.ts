@@ -2,35 +2,33 @@ import httpStatus from "http-status";
 import AppError from "../../error/AppError";
 import { IBooking } from "./booking.interface";
 import BookingModel from "./booking.model";
-import ClassScheduleModel from "../ClassSchedule/classSchedule.model"; // Assuming you have a ClassSchedule model
+import ClassScheduleModel from "../ClassSchedule/classSchedule.model";
 
 const createBookingIntoDB = async (payload: IBooking) => {
-  // Find the schedule to get its time slot
   const schedule = await ClassScheduleModel.findById(payload.scheduleId);
   if (!schedule) {
     throw new AppError(httpStatus.NOT_FOUND, "Schedule not found");
   }
 
-  // Check for existing bookings in the same time slot for the same trainee
-  const existingBooking = await BookingModel.findOne({
-    traineeId: payload.traineeId,
-    scheduleId: payload.scheduleId,
-    status: "confirmed", // Only check confirmed bookings
-  });
+  if (schedule.date === payload.bookingDate) {
+    if (schedule.bookedTrainees.includes(payload.traineeId.toString())) {
+      throw new AppError(httpStatus.CONFLICT, "You have a slot at the same time.");
+    }
 
-  if (existingBooking) {
-    throw new AppError(httpStatus.BAD_REQUEST, "You already have a booking for this time slot");
+    await ClassScheduleModel.findByIdAndUpdate(
+      payload.scheduleId,
+      {
+        $addToSet: { bookedTrainees: payload.traineeId },
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
   }
 
-  // Check if the schedule has available slots
-  const bookingsCount = await BookingModel.countDocuments({ scheduleId: payload.scheduleId, status: "confirmed" });
-  if (bookingsCount >= 10) {
-    throw new AppError(httpStatus.BAD_REQUEST, "No available slots for this schedule");
-  }
-
-  // Create the booking
-  const booking = await BookingModel.create(payload);
-  return booking;
+  const newBooking = await BookingModel.create(payload);
+  return newBooking;
 };
 
 export const BookingService = {

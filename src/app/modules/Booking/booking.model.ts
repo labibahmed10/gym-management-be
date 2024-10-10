@@ -6,12 +6,16 @@ const bookingSchema = new Schema<IBooking>(
     traineeId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: [true, "Trainee is required"],
     },
     scheduleId: {
       type: Schema.Types.ObjectId,
       ref: "Schedule",
-      required: true,
+      required: [true, "Class Schedule is required"],
+    },
+    bookingDate: {
+      type: String,
+      required: [true, "Booking date is required"],
     },
     status: {
       type: String,
