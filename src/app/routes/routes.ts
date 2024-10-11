@@ -3,6 +3,7 @@ import AuthRoute from "../modules/User/user.route";
 import AdminRoute from "../modules/Admin/admin.route";
 import ScheduleRoute from "../modules/ClassSchedule/classSchedule.route";
 import BookingRoute from "../modules/Booking/booking.route";
+import TraineeRoute from "../modules/Trainee/trainee.route";
 
 const router = Router();
 
@@ -22,6 +23,10 @@ const routes = [
   {
     path: "/booking",
     route: BookingRoute,
+  },
+  {
+    path: "/trainee",
+    route: TraineeRoute,
   },
 ];
 
