@@ -43,5 +43,6 @@ const authCheck = (...requiredRoles: TUserRole[]) => {
 const isAdmin = authCheck("admin");
 const isTrainer = authCheck("trainer");
 const isTrainee = authCheck("trainee");
+const isAdminOrTrainer = authCheck("admin", "trainer");
 
-export { isAdmin, isTrainer, isTrainee };
+export { isAdmin, isTrainer, isTrainee, isAdminOrTrainer };

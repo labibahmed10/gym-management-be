@@ -16,7 +16,7 @@ const routes = [
     route: AdminRoute,
   },
   {
-    path: "/admin",
+    path: "/",
     route: ScheduleRoute,
   },
   {
