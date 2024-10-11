@@ -17,7 +17,7 @@ const routes = [
     route: TrainerRouter,
   },
   {
-    path: "/",
+    path: "/schedule",
     route: ScheduleRoute,
   },
   {

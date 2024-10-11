@@ -6,14 +6,14 @@ import validateRequest from "../../middleware/validateRequest";
 
 const ScheduleRoute = Router();
 
-ScheduleRoute.post("/schedule", isAdmin, validateRequest(ClassScheduleValidation.createScheduleZodSchema), ClassScheduleController.createSchedule);
+ScheduleRoute.post("/", isAdmin, validateRequest(ClassScheduleValidation.createScheduleZodSchema), ClassScheduleController.createSchedule);
 
-ScheduleRoute.get("/schedules", isAdminOrTrainer, ClassScheduleController.getAllSchedules);
+ScheduleRoute.get("/all", isAdminOrTrainer, ClassScheduleController.getAllSchedules);
 
-ScheduleRoute.get("/schedule/:id", isAdmin, ClassScheduleController.getScheduleById);
+ScheduleRoute.get("/:id", isAdmin, ClassScheduleController.getScheduleById);
 
 ScheduleRoute.put(
-  "/schedule/:id",
+  "/:id",
   isAdmin,
   validateRequest(ClassScheduleValidation.updateScheduleZodSchema),
   ClassScheduleController.updateScheduleById
