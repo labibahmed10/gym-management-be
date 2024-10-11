@@ -152,7 +152,7 @@ Trainee's email will increase by one repectively for further check while passwor
 
 ## Live Hosting Link
 
-[https://gym-management-be-labibahmed10.vercel.app/](https://gym-management-be-labibahmed10.vercel.app/)
+[https://gym-management-be-xi.vercel.app](https://gym-management-be-xi.vercel.app)
 
 ## Testing Instructions
 
