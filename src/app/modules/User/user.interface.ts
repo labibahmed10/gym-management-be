@@ -10,6 +10,7 @@ export interface IUser {
   role: TUserRole;
   password: string;
   status: TUserStatus;
+  phone?: string;
 }
 
 export interface ILogin {
