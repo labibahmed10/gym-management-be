@@ -6,12 +6,12 @@ import { TrainerController } from "./trainer.controller";
 
 const TrainerRouter = Router();
 
-TrainerRouter.get("/trainers", isAdmin, TrainerController.getAllTrainers);
+TrainerRouter.get("/all", isAdmin, TrainerController.getAllTrainers);
 
-TrainerRouter.post("/trainer", isAdmin, validateRequest(TrainerValidation.TrainerCreateValidation), TrainerController.createTrainer);
+TrainerRouter.post("/", isAdmin, validateRequest(TrainerValidation.TrainerCreateValidation), TrainerController.createTrainer);
 
-TrainerRouter.put("/trainer/:id", isAdmin, validateRequest(TrainerValidation.TrainerUpdateValidation), TrainerController.updateTrainer);
+TrainerRouter.put("/:id", isAdmin, validateRequest(TrainerValidation.TrainerUpdateValidation), TrainerController.updateTrainer);
 
-TrainerRouter.delete("/trainer/:id", isAdmin, TrainerController.deleteTrainer);
+TrainerRouter.delete("/:id", isAdmin, TrainerController.deleteTrainer);
 
 export default TrainerRouter;
