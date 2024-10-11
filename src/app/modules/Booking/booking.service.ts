@@ -15,6 +15,10 @@ const createBookingIntoDB = async (payload: IBooking) => {
       throw new AppError(httpStatus.CONFLICT, "You have a slot at the same time.");
     }
 
+    if (schedule.bookedTrainees.length >= schedule.maxTrainees) {
+      throw new AppError(httpStatus.CONFLICT, "Class schedule is full. Maximum 10 trainees allowed per schedule.");
+    }
+
     await ClassScheduleModel.findByIdAndUpdate(
       payload.scheduleId,
       {

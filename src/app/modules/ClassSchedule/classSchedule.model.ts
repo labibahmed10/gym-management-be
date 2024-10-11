@@ -90,13 +90,11 @@ scheduleSchema.pre("save", async function (next) {
 
   // Ensure booked trainees do not exceed maxTrainees
   if (this.bookedTrainees.length > this.maxTrainees) {
-    throw new AppError(httpStatus.BAD_REQUEST, "Class is already fully booked. Max 10 trainees.");
+    throw new AppError(httpStatus.BAD_REQUEST, "Class schedule is full. Maximum 10 trainees allowed per schedule.");
   }
 
   next();
 });
-
-
 
 const ScheduleModel = model<ISchedule>("Schedule", scheduleSchema);
 
