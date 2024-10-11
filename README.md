@@ -6,7 +6,7 @@ This system is designed to manage gym operations efficiently. It allows for clas
 
 ## Relation Diagram
 
-[Insert your relation diagram image or link here]
+![Relational Diagram](./src/app/asset/gm.png)
 
 ## Technology Stack
 
